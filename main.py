@@ -90,8 +90,6 @@ def code_reg(message):
     global register_data
     register_data[message.chat.id].append(code)
     print(register_data[message.chat.id])
-    #  bot.send_message(message.chat.id, "Ваш персональный код:")  #  Код пользователям не выдаём
-    #  bot.send_message(message.chat.id, code)
     registration_complete(message)
 
 
@@ -151,8 +149,6 @@ def order_message(message):
         start_message(message)
     if message.text == "/register":
         register_reply(message)
-    if message.text == "/botstop" and message.chat.id == 1393211683:  # insert admin's chat id
-        bot.stop_polling()
     if message.text == "/code":
         if query.check_for_admin(message.chat.id):
             code = generate_code()
@@ -161,9 +157,7 @@ def order_message(message):
             wait
             bot.send_message(message.chat.id, str(code))
         else:
-            print('Не админ пытался взять /code')
-            print(message.chat.id)
-            print(query.check_for_admin(message.chat.id))
+            print()
     if message.text == "/help":
         bot.send_message(message.chat.id, "Список команд:\n/register - Регистрация в системе\n/order"
                                           " - Заказать пропуск")
@@ -184,8 +178,7 @@ def order_helper(message):
 
 def start_message(message):
     if query.select_code(message) is None:
-        bot.send_message(message.chat.id, "Приветствую! Это Бот, созданный для заказа пропусков в КП 'Клубничные "
-                                          "поля'.\n "
+        bot.send_message(message.chat.id, "Приветствую! Это Бот, созданный для заказа пропусков.\n "
                          + "Чтобы зарегистрироваться нажмите \n/register.")
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
         item1 = types.KeyboardButton("/register")
