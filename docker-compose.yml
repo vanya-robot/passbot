@@ -1,0 +1,12 @@
+version: "2.12.2"
+
+services:
+  bot:
+    build: .
+    container_name: bot
+    command:
+      - python main.py & client_to_server.py
+    ports:
+      - 50:50
+    volumes:
+      - /var/lib/docker/volumes/bot-vol/_data:/vol

@@ -1,0 +1,10 @@
+test/strawberry.db
+test.py
+bot.txt
+chatbot_venv
+test
+vol
+README.md
+.gitignore
+.idea
+__pycache__

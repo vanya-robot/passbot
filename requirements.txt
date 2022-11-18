@@ -1,0 +1,7 @@
+pyTelegramBotAPI
+pandas
+oauth2client
+gspread
+gspread_dataframe
+gspread_formatting
+google-api-python-client==2.65.0
