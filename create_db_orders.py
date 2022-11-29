@@ -2,7 +2,7 @@ import sqlite3
 
 
 def create_orders():
-    connection = sqlite3.connect('vol/strawberry.db')
+    connection = sqlite3.connect('vol/passbot.db')
     cursor = connection.cursor()
 
     cursor.execute('''CREATE TABLE IF NOT EXISTS Orders (Number INTEGER PRIMARY KEY not null, Code TEXT not null, 

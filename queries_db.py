@@ -6,7 +6,7 @@ import time
 def add_row_users(inviter_code, name, house_num, phone, code, chat_id):
     insert_query = '''INSERT INTO Users (Phone, Name, House_num, Code, Inviter_code, Chat_Id)
                         VALUES(?,?,?,?,?,?)'''
-    connection = sqlite3.connect('vol/strawberry.db')
+    connection = sqlite3.connect('vol/passbot.db')
     cursor = connection.cursor()
 
     row = [phone, name, house_num, code, inviter_code, chat_id]
@@ -20,7 +20,7 @@ def add_row_users(inviter_code, name, house_num, phone, code, chat_id):
 def add_row_orders(code, car_num, car_brand):
     insert_query = '''INSERT INTO Orders (Code, Car_num, Car_brand, Time)
                         VALUES(?,?,?,?)'''
-    connection = sqlite3.connect('vol/strawberry.db')
+    connection = sqlite3.connect('vol/passbot.db')
     cursor = connection.cursor()
 
     row = [code, car_num, car_brand, datetime.datetime.now()]
@@ -36,7 +36,7 @@ def add_new_code(code, admin_id):
                             VALUES(?,?)'''
     code = (code, admin_id)
 
-    connection = sqlite3.connect('vol/strawberry.db')
+    connection = sqlite3.connect('vol/passbot.db')
     cursor = connection.cursor()
     cursor.execute(insert_query, code)
 
@@ -48,7 +48,7 @@ def if_code_exists(code):
     select_query = '''SELECT Code FROM InvitationCodes WHERE Code = ?'''
     code = (code,)
 
-    connection = sqlite3.connect('vol/strawberry.db')
+    connection = sqlite3.connect('vol/passbot.db')
     cursor = connection.cursor()
     cursor.execute(select_query, code)
     result = cursor.fetchall()
@@ -62,7 +62,7 @@ def swap_code_to_used(code):
                         WHERE Code = ?'''
     code = (code,)
 
-    connection = sqlite3.connect('vol/strawberry.db')
+    connection = sqlite3.connect('vol/passbot.db')
     cursor = connection.cursor()
     cursor.execute(insert_query, code)
 
@@ -74,7 +74,7 @@ def delete_code(code):
     delete_query = '''DELETE FROM InvitationCodes WHERE Code = ?'''
     code = (code,)
 
-    connection = sqlite3.connect('vol/strawberry.db')
+    connection = sqlite3.connect('vol/passbot.db')
     cursor = connection.cursor()
     cursor.execute(delete_query, code)
     connection.commit()
@@ -86,7 +86,7 @@ def select_code(message):
     chat_id = (message.chat.id,)
     select_query = '''SELECT Code FROM Users WHERE Chat_Id = ?'''
 
-    connection = sqlite3.connect('vol/strawberry.db')
+    connection = sqlite3.connect('vol/passbot.db')
     cursor = connection.cursor()
     cursor.execute(select_query, chat_id)
     try:
@@ -100,7 +100,7 @@ def select_code(message):
 
 def select_info_for_order(code):
 
-    connection = sqlite3.connect('vol/strawberry.db')
+    connection = sqlite3.connect('vol/passbot.db')
     select_query = '''SELECT Name, Phone, House_num FROM Users WHERE Code = ?'''
     code = (code,)
     cursor = connection.cursor()

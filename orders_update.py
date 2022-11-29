@@ -16,7 +16,7 @@ def select_current_orders(time_difference):  # В переменную time_diff
     select_query = '''SELECT Code, Car_num, Car_brand, Time FROM Orders WHERE ? - strftime('%s', Time) <= ? 
     AND Status = 0'''
     query_values = (time_now, time_difference)
-    connection = sqlite3.connect('vol/strawberry.db')
+    connection = sqlite3.connect('vol/passbot.db')
     df = pd.read_sql_query(sql=select_query, con=connection, params=query_values)
 
     home_num = []
@@ -50,7 +50,7 @@ def update_order_status(df):
 
     update_query = '''Update Orders SET Status = 1, Time_of_arrival = ? WHERE Time = ?'''
 
-    connection = sqlite3.connect('vol/strawberry.db')
+    connection = sqlite3.connect('vol/passbot.db')
     cursor = connection.cursor()
 
     for order in orders:
